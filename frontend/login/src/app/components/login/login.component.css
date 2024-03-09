@@ -1,0 +1,39 @@
+.container{
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+}
+
+.formContainer{
+    margin-top: 300px;
+    border: 2px solid green;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+.field{
+    /* border: 2px solid red; */
+    margin-top: 10px;
+}
+
+.field label{
+    float: left;
+    width: 100px;
+}
+
+.field input{
+    margin-left: 50px;
+}
+
+.buttonContainer{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.error{
+    /* border: 2px solid red; */
+    margin-left: 150px;
+    color: red;
+}
