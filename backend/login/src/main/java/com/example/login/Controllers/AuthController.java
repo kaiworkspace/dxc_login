@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.login.Dto.RegisterDTO;
+import com.example.login.Dto.ResponseDTO;
 import com.example.login.Models.RoleEntity;
 import com.example.login.Models.UserEntity;
 import com.example.login.Repository.RoleRepository;
@@ -85,10 +86,11 @@ public class AuthController {
 	
 	@CrossOrigin
 	@GetMapping("/login")
-	public ResponseEntity<String> login(@RequestHeader(value="Authorization", required=true) String authorizationHeader){
+	public ResponseEntity<ResponseDTO> login(@RequestHeader(value="Authorization", required=true) String authorizationHeader){
 		// check auth header
 		if(authorizationHeader == null && !authorizationHeader.startsWith("Basic")) {
-			return new ResponseEntity<>("Missing or invalid headers", HttpStatus.BAD_REQUEST);
+//			return new ResponseEntity<>("Missing or invalid headers", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ResponseDTO("Missing or invalid headers", 400), HttpStatus.BAD_REQUEST);
 		}
 		
 		// extract and decode
@@ -103,7 +105,8 @@ public class AuthController {
 			username = credentialsArr[0];
 			password = credentialsArr[1];
 		}catch(Exception e) {
-			return new ResponseEntity<>("Missing Credentials", HttpStatus.BAD_REQUEST);
+//			return new ResponseEntity<>("Missing Credentials", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ResponseDTO("Missing Credentials", 400), HttpStatus.BAD_REQUEST);
 		}
 		
 		// check if password matches
@@ -112,9 +115,9 @@ public class AuthController {
 					new UsernamePasswordAuthenticationToken(username, password));
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			
-			return new ResponseEntity<>("User signed in successfully", HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseDTO("User signed in successfully", 200), HttpStatus.OK);
 		}catch(BadCredentialsException e) {
-			return new ResponseEntity<>("Invalid username or password", HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<>(new ResponseDTO("Invalid username or password", 401), HttpStatus.UNAUTHORIZED);
 		}
 	}
 	
