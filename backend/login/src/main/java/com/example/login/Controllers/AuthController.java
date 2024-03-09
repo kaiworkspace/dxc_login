@@ -1,6 +1,7 @@
 package com.example.login.Controllers;
 
 import java.util.Collections;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +10,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +26,8 @@ import com.example.login.Models.RoleEntity;
 import com.example.login.Models.UserEntity;
 import com.example.login.Repository.RoleRepository;
 import com.example.login.Repository.UserRepository;
+
+import jakarta.validation.Valid;
 
 @CrossOrigin
 @RestController
@@ -53,7 +60,7 @@ public class AuthController {
 	
 	@CrossOrigin
 	@PostMapping("/register")
-	public ResponseEntity<String> register(@RequestBody RegisterDTO registerDto){
+	public ResponseEntity<String> register(@RequestBody @Valid RegisterDTO registerDto){
 		// check if user alr exists
 		if(userRepository.existsByUsername(registerDto.getUsername())) {
 			return new ResponseEntity<>("Username taken", HttpStatus.BAD_REQUEST);
@@ -71,5 +78,15 @@ public class AuthController {
 		return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
 	}
 	
-	
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<String> handleValidationException(MethodArgumentNotValidException e){
+		BindingResult result = e.getBindingResult();
+		List<FieldError> fieldErrors = result.getFieldErrors();
+		
+		StringBuilder errorMessage = new StringBuilder("Validation failed. ");
+		for (FieldError fieldError: fieldErrors) {
+			errorMessage.append(fieldError.getDefaultMessage()).append("; ");
+		}
+		return new ResponseEntity<>(errorMessage.toString(), HttpStatus.BAD_REQUEST);
+	}
 }
