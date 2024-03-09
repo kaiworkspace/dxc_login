@@ -37,3 +37,10 @@
     margin-left: 150px;
     color: red;
 }
+
+.errorMessage{
+    /* border: 2px solid red; */
+    margin-top: 40px;
+    text-align: center;
+    color: red;
+}

@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   usernameCheck = false
   passwordCheck = false
   formCheck = false
+  errorMessage = ""
 
   loginForm = new FormGroup({
     username: new FormControl("", 
@@ -55,9 +56,15 @@ export class LoginComponent implements OnInit {
   }
 
   handleResponse(res: any){
+    console.log("Handling")
     if(res.statusCode == 200){
-      
+      // redirect to landing page and check for roles
     }
+  }
+
+  handleError(error: any){
+    this.errorMessage = error.error.message
+    console.log(error.error.message)
   }
 
   login(){
@@ -65,15 +72,14 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.valid){
       let username = this.loginForm.value.username
       let password = this.loginForm.value.password
-      this.loginService.login(username, password).subscribe(res =>{
-        console.log(res)
-        this.handleResponse(res)
-        // let data = JSON.parse(res)
-        // if(data.statusCode == 200){
-        //   console.log("sign in")
-        // }
-      })
-      
+      this.loginService.login(username, password).subscribe(
+        (res) =>{
+          this.handleResponse(res)
+        },
+        (error) =>{
+          this.handleError(error)
+        }
+      )
     }
   }
 }
