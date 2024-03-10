@@ -66,12 +66,13 @@ public class BasicController {
 		}
 		logger.info(jwtToken);
 		// fetch user information
-		String usernmae = this.jwtGenerator.getUsernameFromJWT(jwtToken);
-		Optional<UserEntity> userOptional = userRepository.findByUsername("user");
+		String username = this.jwtGenerator.getUsernameFromJWT(jwtToken);
+		Optional<UserEntity> userOptional = userRepository.findByUsername(username);
 		UserEntity user = userOptional.get();
 		UserDTO userDto = new UserDTO(user.getUsername(), user.getName(), user.getRoles());
 		ResponseDTO responseDto = new ResponseDTO("Retrieved user info", userDto, 200);
-		logger.info(user.getName());
+//		logger.info("name: ", user.getName());
+//		logger.info("username: ", user.getUsername());
 		return new ResponseEntity<>(responseDto, HttpStatus.OK);
 	}
 	
