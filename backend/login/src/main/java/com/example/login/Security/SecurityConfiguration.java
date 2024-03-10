@@ -43,6 +43,7 @@ public class SecurityConfiguration {
 			.and()
 			.authorizeHttpRequests((authz)-> authz
 					.requestMatchers("/auth/**").permitAll()
+					.requestMatchers("/dashboard/restricted").hasRole("manager")
 					.anyRequest().authenticated()
 					);
 		http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

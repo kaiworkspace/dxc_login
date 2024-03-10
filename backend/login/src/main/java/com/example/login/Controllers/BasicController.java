@@ -89,4 +89,13 @@ public class BasicController {
 		response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 		return new ResponseEntity<>("Logout successful", HttpStatus.OK);
 	}
+	
+	@CrossOrigin
+	@GetMapping("/dashboard/restricted")
+	public ResponseEntity<ResponseDTO> getRestrictedContent(HttpServletResponse response){
+		String content = "The top secret content is:  P@55w0rd!";
+		ResponseDTO responseDto = new ResponseDTO(content, null, 200);
+		return new ResponseEntity<>(responseDto, HttpStatus.OK);
+	}
+
 }

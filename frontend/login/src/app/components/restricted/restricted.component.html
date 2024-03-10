@@ -1,0 +1,8 @@
+<div *ngIf="!isLoading" class="container">
+    <div *ngIf="!permissionGranted ; else granted">
+        You do not have permission
+    </div>
+    <ng-template #granted>
+        {{restrictedContent}}
+    </ng-template>
+</div>

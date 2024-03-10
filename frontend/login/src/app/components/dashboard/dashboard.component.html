@@ -20,6 +20,9 @@
     <div *ngIf="isManager; else isUser">
         <h2 style="border: 2px solid red; height: 300px; text-align: center;">
             This is a restricted Manager page
+            <h3>
+                <a href="/restricted">Restricted Link</a>
+            </h3>
         </h2>
     </div>
     <ng-template #isUser>
