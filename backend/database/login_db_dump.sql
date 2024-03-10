@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `login_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `login_db`;
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: login_db
@@ -62,7 +64,7 @@ CREATE TABLE `user_roles` (
 
 LOCK TABLES `user_roles` WRITE;
 /*!40000 ALTER TABLE `user_roles` DISABLE KEYS */;
-INSERT INTO `user_roles` VALUES (1,1),(2,1),(3,2);
+INSERT INTO `user_roles` VALUES (1,1),(2,1),(2,2);
 /*!40000 ALTER TABLE `user_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +90,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'john smith','$2a$10$1BqKNrliPyThXb/e0PVIkOFjXHj6xCVxsf5d75gjccd4KdDo8B8ui','jsmith'),(2,'grover underwood','$2a$10$1BqKNrliPyThXb/e0PVIkOFjXHj6xCVxsf5d75gjccd4KdDo8B8ui','grover'),(3,'kelly','$2a$10$GHh5NurD0zxiqVUFcsvjiOSOEsJrBwxztBl.2e9UDucGgtEfW5k6O','kellz');
+INSERT INTO `users` VALUES (1,'john smith','$2a$10$1BqKNrliPyThXb/e0PVIkOFjXHj6xCVxsf5d75gjccd4KdDo8B8ui','jsmith'),(2,'grover underwood','$2a$10$1BqKNrliPyThXb/e0PVIkOFjXHj6xCVxsf5d75gjccd4KdDo8B8ui','grover'),(3,'kelly','$2a$10$1BqKNrliPyThXb/e0PVIkOFjXHj6xCVxsf5d75gjccd4KdDo8B8ui','kellz');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -101,4 +103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-10 22:45:03
+-- Dump completed on 2024-03-10 23:58:07
