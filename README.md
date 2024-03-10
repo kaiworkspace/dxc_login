@@ -16,7 +16,7 @@ login interface assignment from DXC
 - run ```npm install``` to install packages
 - run ```ng serve``` to start
 
-## Defaults Accounts for testing
+## Default Accounts for testing
 |type    |username  |password  |
 |--------|----------|----------|
 |manager |jsmith    |password  |
