@@ -1,0 +1,35 @@
+<div *ngIf="!isLoading">
+    <div style="text-align: center;">
+        <h1>
+            DASHBOARD
+        </h1>
+    </div>
+    <div style="margin-left: 50px;">
+        <h3>
+            Welcome {{username}}
+        </h3>
+        <h3>
+            Your name is: {{name}}
+        </h3>
+        <div *ngFor="let role of roles">
+            <h3>
+                Role: {{role['name']}}
+            </h3>
+        </div>
+    </div>
+    <div *ngIf="isAdmin; else isUser">
+        <h2>
+            This is a restricted admin page
+        </h2>
+    </div>
+    <ng-template #isUser>
+        <h2 style="border: 2px solid blue; height: 300px; text-align: center;">
+            This is a normal user page
+        </h2>
+    </ng-template>
+    <div style="display: flex; justify-content: center;">
+        <button (click)="logout()">
+            logout
+        </button>
+    </div>
+</div>

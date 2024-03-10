@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginService } from './login.service';
 import { HttpResponse } from '@angular/common/http';
+import { Router, NavigationExtras } from '@angular/router'
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -56,15 +57,20 @@ export class LoginComponent implements OnInit {
   }
 
   handleResponse(res: any){
-    console.log("Handling")
-    if(res.statusCode == 200){
-      // redirect to landing page and check for roles
+    console.log("Success")
+    const navigationExtras: NavigationExtras = {
+      state: {
+        accessToken: res.accessToken,
+        tokenType: res.tokenType,
+      }
     }
+    this.router.navigate(["/dashboard"], navigationExtras)    
   }
 
   handleError(error: any){
-    this.errorMessage = error.error.message
-    console.log(error.error.message)
+    if(error.status == 401){
+      this.errorMessage = "Invalid username or password"
+    }
   }
 
   login(){
