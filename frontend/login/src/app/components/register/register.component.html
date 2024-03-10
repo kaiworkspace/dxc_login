@@ -1,27 +1,74 @@
-<!-- Validation error displays -->
-<!-- <div *ngIf="loginForm.get('username')?.hasError('required') && (usernameCheck || formCheck)" class="error">
-    Username is required
-</div>
-<div *ngIf="loginForm.get('username')?.hasError('minlength') && (usernameCheck || formCheck)" class="error">
-    Username must be at least 3 characters long
-</div>
-<div *ngIf="loginForm.get('username')?.hasError('maxlength') && (usernameCheck || formCheck)" class="error">
-    Username must not be longer than 36 characters
-</div>
-<div *ngIf="loginForm.get('username')?.hasError('symbolsNotAllowed') && (usernameCheck || formCheck)" class="error">
-    No special characters allowed
-</div> -->
+<div class="container">
+    <div *ngIf="!registerSuccess; else rSuccess" class="formContainer">
+        <form [formGroup]="registerForm" (submit)="register()">
+            <div class="field">
+                <label for="name">Name: </label>
+                <input id="name" type="text" formControlName="name" placeholder="name" (focus)="uncheckName()" (blur)="checkName()">
+                <!-- Validation error displays -->
+                <div *ngIf="registerForm.get('name')?.hasError('required') && (nameCheck || formCheck)" class="error">
+                    Name is required
+                </div>
+                <div *ngIf="registerForm.get('name')?.hasError('minlength') && (nameCheck || formCheck)" class="error">
+                    Name must be at least 4 characters long
+                </div>
+                <div *ngIf="registerForm.get('name')?.hasError('maxlength') && (nameCheck || formCheck)" class="error">
+                    Name must not be longer than 36 characters
+                </div>
+                <div *ngIf="registerForm.get('name')?.hasError('symbolsNotAllowed') && (nameCheck || formCheck)" class="error">
+                    No special characters allowed
+                </div>
+            </div>
+            <div class="field">
+                <label for="username">Username: </label>
+                <input id="username" type="text" formControlName="username" placeholder="username" (focus)="uncheckUsername()" (blur)="checkUsername()">
+                <!-- Validation error displays -->
+                <div *ngIf="registerForm.get('username')?.hasError('required') && (usernameCheck || formCheck)" class="error">
+                    Username is required
+                </div>
+                <div *ngIf="registerForm.get('username')?.hasError('minlength') && (usernameCheck || formCheck)" class="error">
+                    Username must be at least 4 characters long
+                </div>
+                <div *ngIf="registerForm.get('username')?.hasError('maxlength') && (usernameCheck || formCheck)" class="error">
+                    Username must not be longer than 36 characters
+                </div>
+                <div *ngIf="registerForm.get('username')?.hasError('symbolsNotAllowed') && (usernameCheck || formCheck)" class="error">
+                    No special characters allowed
+                </div>
+            </div>
+            <div class="field">
+                <label for="password">Password: </label>
+                <input id="password" type="password" formControlName="password" placeholder="password" (focus)="uncheckPassword()" (blur)="checkPassword()">
+                <!-- Validation error displays -->
+                <div *ngIf="registerForm.get('password')?.hasError('required') && (passwordCheck || formCheck)" class="error">
+                    Password is required
+                </div>
+                <div *ngIf="registerForm.get('password')?.hasError('minlength') && (passwordCheck || formCheck)" class="error">
+                    Password must be at least 8 characters long
+                </div>
+                <div *ngIf="registerForm.get('password')?.hasError('maxlength') && (passwordCheck || formCheck)" class="error">
+                    Password must not be longer than 254 characters
+                </div>
+                <div *ngIf="registerForm.get('password')?.hasError('containsEscapeChars') && (passwordCheck || formCheck)" class="error">
+                    No escape characters allowed
+                </div>
+            </div>
+            <div class="errorMessage">
+                {{errorMessage}}
+            </div>
+            <div class="buttonContainer">
+                <button type="submit" class="primary">Register</button>
+            </div>
+        </form>
+    </div>
+    <ng-template #rSuccess>
+        <div style="margin-top: 300px; text-align: center; color: green;">
+            <div>
+                User successfully registered
+            </div>
+            <div>
+                Redirecting to login...
+            </div>
+        </div>
+    </ng-template>
 
-<!-- Validation error displays -->
-<!-- <div *ngIf="loginForm.get('password')?.hasError('required') && (passwordCheck || formCheck)" class="error">
-    Password is required
 </div>
-<div *ngIf="loginForm.get('password')?.hasError('minlength') && (passwordCheck || formCheck)" class="error">
-    Password must be at least 8 characters long
-</div>
-<div *ngIf="loginForm.get('password')?.hasError('maxlength') && (passwordCheck || formCheck)" class="error">
-    Password must not be longer than 254 characters
-</div>
-<div *ngIf="loginForm.get('password')?.hasError('symbolsNotAllowed') && (passwordCheck || formCheck)" class="error">
-    No special characters allowed
-</div> -->

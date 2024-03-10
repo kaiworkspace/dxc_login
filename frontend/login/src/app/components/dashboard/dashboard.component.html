@@ -17,14 +17,14 @@
             </h3>
         </div>
     </div>
-    <div *ngIf="isAdmin; else isUser">
-        <h2>
-            This is a restricted admin page
+    <div *ngIf="isManager; else isUser">
+        <h2 style="border: 2px solid red; height: 300px; text-align: center;">
+            This is a restricted Manager page
         </h2>
     </div>
     <ng-template #isUser>
         <h2 style="border: 2px solid blue; height: 300px; text-align: center;">
-            This is a normal user page
+            This is a normal User page
         </h2>
     </ng-template>
     <div style="display: flex; justify-content: center;">

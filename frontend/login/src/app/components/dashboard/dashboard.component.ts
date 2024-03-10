@@ -34,8 +34,8 @@ export class DashboardComponent implements OnInit {
           this.name = data.userDto.name
           this.roles = data.userDto.roles
           for(let i=0; i<this.roles.length; i++){
-            if(this.roles[i]['name'] == "admin"){
-              this.isAdmin = true
+            if(this.roles[i]['name'] == "manager"){
+              this.isManager = true
             }
           }
           this.isLoading = false
@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
   username = ""
   name = ""
   roles = []
-  isAdmin = false
+  isManager = false
 
   logout(){
     this.dashBoardService.logout().subscribe(res=>{

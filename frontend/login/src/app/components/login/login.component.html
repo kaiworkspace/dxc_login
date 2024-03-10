@@ -19,9 +19,12 @@
                 <div *ngIf="loginForm.get('password')?.hasError('required') && (passwordCheck || formCheck)" class="error">
                     Password is required
                 </div>
-                <div *ngIf="loginForm.get('password')?.hasError('symbolsNotAllowed') && (passwordCheck || formCheck)" class="error">
-                    No special characters allowed
+                <div *ngIf="loginForm.get('password')?.hasError('containsEscapeChars') && (passwordCheck || formCheck)" class="error">
+                    No escape characters allowed
                 </div>
+            </div>
+            <div style="margin-top: 20px;">
+                Register a new account <a href="/register">Here</a>
             </div>
             <div class="errorMessage">
                 {{errorMessage}}

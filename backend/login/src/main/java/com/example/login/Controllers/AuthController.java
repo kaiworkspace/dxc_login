@@ -45,7 +45,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
-@CrossOrigin(origins = "http://localhost:4200", allowCredentials="true")
+@CrossOrigin(origins="http://localhost:4200", allowCredentials = "true")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -79,22 +79,25 @@ public class AuthController {
 	
 	@CrossOrigin
 	@PostMapping("/register")
-	public ResponseEntity<String> register(@RequestBody @Valid RegisterDTO registerDto){
+	public ResponseEntity<ResponseDTO> register(@RequestBody @Valid RegisterDTO registerDto){
 		// check if user alr exists
 		if(userRepository.existsByUsername(registerDto.getUsername())) {
-			return new ResponseEntity<>("Username taken", HttpStatus.BAD_REQUEST);
+			ResponseDTO responseDto = new ResponseDTO("Username taken",null, 400);
+			return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
 		}
 		
 		UserEntity user = new UserEntity();
 		user.setName(registerDto.getName());
 		user.setUsername(registerDto.getUsername());
+		logger.info("Encoded Password: ", passwordEncoder.encode(registerDto.getPassword()));
 		user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
 		RoleEntity roles = roleRepository.findByName("user").get();
 		user.setRoles(Collections.singletonList(roles));
 		
 		userRepository.save(user);
 		
-		return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+		ResponseDTO responseDto = new ResponseDTO("User registered successfully",null, 200);
+		return new ResponseEntity<>(responseDto, HttpStatus.OK);
 	}
 	
 	@CrossOrigin
