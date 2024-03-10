@@ -106,8 +106,6 @@ public class AuthController {
 		logger.info("Reached api");
 		// check auth header
 		if(authorizationHeader == null && !authorizationHeader.startsWith("Basic")) {
-//			ResponseDTO responseDto = new ResponseDTO("Missing or invalid headers", null, 400);
-//			return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
 			AuthResponseDTO responseDto = new AuthResponseDTO(null);
 			return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
 		}
@@ -124,8 +122,6 @@ public class AuthController {
 			username = credentialsArr[0];
 			password = credentialsArr[1];
 		}catch(Exception e) {
-//			ResponseDTO responseDto = new ResponseDTO("Missing credentials", null, 400);
-//			return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
 			AuthResponseDTO responseDto = new AuthResponseDTO(null);
 			return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
 		}
@@ -135,13 +131,6 @@ public class AuthController {
 			Authentication authentication = authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(username, password));
 			SecurityContextHolder.getContext().setAuthentication(authentication);
-			// retrieve user details
-//			Optional<UserEntity> userOptional = userRepository.findByUsername(username);
-//			UserEntity user = userOptional.get();
-//			UserDTO userDto = new UserDTO(user.getUsername(), user.getName(), user.getRoles());
-//			ResponseDTO responseDto = new ResponseDTO("User signed in successfully", userDto, 200);
-//			return new ResponseEntity<>(responseDto, HttpStatus.OK);
-			
 			String token = jwtGenerator.generateToken(authentication);
 			// set cookies
 			ResponseCookie cookie = ResponseCookie.from("jwtToken", token)
@@ -155,8 +144,6 @@ public class AuthController {
 			return new ResponseEntity<>(responseDto, HttpStatus.OK);
 		
 		}catch(BadCredentialsException e) {
-//			ResponseDTO responseDto = new ResponseDTO("Invalid username or password", null, 401);
-//			return new ResponseEntity<>(responseDto, HttpStatus.UNAUTHORIZED);
 			AuthResponseDTO responseDto = new AuthResponseDTO(null);
 			return new ResponseEntity<>(responseDto, HttpStatus.UNAUTHORIZED);
 		}

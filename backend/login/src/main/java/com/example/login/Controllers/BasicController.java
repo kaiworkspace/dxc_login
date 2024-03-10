@@ -41,22 +41,6 @@ public class BasicController {
 	
 	Logger logger = LoggerFactory.getLogger(BasicController.class);
 	
-//	@CrossOrigin
-//	@GetMapping("/dashboard")
-//	public ResponseEntity<ResponseDTO> dashboard(@RequestHeader(value="Authorization", required=true) String authorizationHeader){
-//		// check auth header
-//		if(authorizationHeader == null && !authorizationHeader.startsWith("Bearer ")) {
-//			return null;
-//		}
-//		// fetch user information
-//		String username = this.jwtGenerator.getUsernameFromJWT(authorizationHeader.substring(7));
-//		Optional<UserEntity> userOptional = userRepository.findByUsername(username);
-//		UserEntity user = userOptional.get();
-//		UserDTO userDto = new UserDTO(user.getUsername(), user.getName(), user.getRoles());
-//		ResponseDTO responseDto = new ResponseDTO("Retrieved user info", userDto, 200);
-//		return new ResponseEntity<>(responseDto, HttpStatus.OK);
-//	}
-	
 	@CrossOrigin
 	@GetMapping("/dashboard")
 	public ResponseEntity<ResponseDTO> dashboard(@CookieValue(name="jwtToken", required=true) String jwtToken){
