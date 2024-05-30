@@ -1,5 +1,5 @@
 # dxc_login
-login interface assignment from DXC
+login interface assignment from DXC. Default testing accounts will be added into the database when setting up(see below). Upon logging in, a web token will be saved in the form of a cookie for single sign on purposes. 
 
 ## Stack
 - Angular
@@ -15,6 +15,7 @@ login interface assignment from DXC
 - navigate to frontend > login
 - run ```npm install``` to install packages
 - run ```ng serve``` to start
+- on the browser, navigate to ```http://localhost:4200/login``` 
 
 ## Default Accounts for testing
 |type    |username  |password  |
@@ -23,3 +24,4 @@ login interface assignment from DXC
 |manager |grover    |password  |
 |user    |kellz     |password  |
 - accounts registered using the interface will be ```user``` level accounts
+- registration and login also supports English and Chinese
