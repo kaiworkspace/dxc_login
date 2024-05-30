@@ -66,7 +66,7 @@ public class BasicController {
 		// clear cookie
 		ResponseCookie cookie = ResponseCookie.from("jwtToken", "")
 			.sameSite("None")
-			.secure(false)
+			.secure(true)
 			.httpOnly(true)
 			.path("/dashboard")
 			.build();

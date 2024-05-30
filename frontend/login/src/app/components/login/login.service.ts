@@ -14,6 +14,7 @@ export class LoginService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': "true",
       // Authorization: 'Basic ' + btoa(`${username}:${password}`),
       Authorization: 'Basic ' + encodedCredentials,
     })

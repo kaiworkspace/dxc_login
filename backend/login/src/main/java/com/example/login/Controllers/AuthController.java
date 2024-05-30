@@ -138,8 +138,9 @@ public class AuthController {
 			// set cookies
 			ResponseCookie cookie = ResponseCookie.from("jwtToken", token)
 				.sameSite("None")
-				.secure(false)
+				.secure(true)
 				.httpOnly(true)
+				.maxAge(600000)
 				.path("/dashboard")
 				.build();
 			response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());

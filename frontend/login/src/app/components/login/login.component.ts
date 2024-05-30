@@ -12,7 +12,18 @@ import { Router, NavigationExtras } from '@angular/router'
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router) { 
+    const navigation = this.router.getCurrentNavigation()
+    const state = navigation?.extras.state as{
+      status: string
+    }
+    // save state
+
+    if(state){
+      // console.log(state.status)
+      this.errorMessage = state.status
+    }
+  }
 
   ngOnInit(): void {
   }
@@ -72,7 +83,7 @@ export class LoginComponent implements OnInit {
   }
 
   handleResponse(res: any){
-    console.log("Success")
+    // console.log("Success")
     const navigationExtras: NavigationExtras = {
       state: {
         accessToken: res.accessToken,

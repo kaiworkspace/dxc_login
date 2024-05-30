@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router'
+import { Router, NavigationExtras } from '@angular/router'
 import { DashboardService } from './dashboard.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("Calling service")
+    // console.log("Calling service")
     this.isLoading = true
     this.dashBoardService.loadUserInformation().subscribe(
       (res)=>{
@@ -44,7 +44,12 @@ export class DashboardComponent implements OnInit {
       (error)=>{
         console.log(error)
         // redirect back to login
-        this.router.navigate(["/login"])
+        const navigationExtras: NavigationExtras = {
+          state: {
+            status: "Please log in"
+          }
+        }
+        this.router.navigate(["/login"], navigationExtras)
       }
   )}
   isLoading = false
