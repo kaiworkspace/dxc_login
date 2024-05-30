@@ -1,5 +1,6 @@
 package com.example.login.Controllers;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -112,7 +113,9 @@ public class AuthController {
 		
 		// extract and decode
 		String credentialBased64 = authorizationHeader.substring(6);
-		String decodedCredentials = new String(java.util.Base64.getDecoder().decode(credentialBased64));
+		byte[] decodedBytes = java.util.Base64.getDecoder().decode(credentialBased64);
+		String decodedCredentials = new String(decodedBytes, StandardCharsets.UTF_8);
+//		String decodedCredentials = new String(java.util.Base64.getDecoder().decode(credentialBased64));
 		String[] credentialsArr = decodedCredentials.split(":");
 		String username = "";
 		String password = "";
